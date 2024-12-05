@@ -37,7 +37,9 @@ func builtinToNumber(_ BuiltinContext, operands []*ast.Term, iter func(*ast.Term
 		if err != nil {
 			return err
 		}
-		return iter(ast.NewTerm(ast.Number(a)))
+
+		num := strings.TrimLeft(strValue, "+")
+		return iter(ast.NewTerm(ast.Number(num)))
 	}
 	return builtins.NewOperandTypeErr(1, operands[0].Value, "null", "boolean", "number", "string")
 }
